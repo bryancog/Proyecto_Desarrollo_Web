@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Listado de Rutas</title>
+  </head>
+  <body>
+    <h1>Rutas</h1>
+    <a th:href="@{/rutas/nuevo}">Nueva Ruta</a>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Segura</th>
+          <th>Longitud</th>
+          <th>Daño</th>
+          <th>Causa</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="ruta : ${rutas}">
+          <td th:text="${ruta.id}"></td>
+          <td th:text="${ruta.origen.nombre}"></td>
+          <td th:text="${ruta.destino.nombre}"></td>
+          <td th:text="${ruta.segura}"></td>
+          <td th:text="${ruta.longitud}"></td>
+          <td th:text="${ruta.dano}"></td>
+          <td th:text="${ruta.causa}"></td>
+          <td>
+            <a th:href="@{/rutas/editar/{id}(id=${ruta.id})}">Editar</a>
+            <a th:href="@{/rutas/eliminar/{id}(id=${ruta.id})}">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

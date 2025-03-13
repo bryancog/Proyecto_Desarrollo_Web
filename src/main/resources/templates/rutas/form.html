@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Formulario de Ruta</title>
+  </head>
+  <body>
+    <h1 th:text="${ruta.id == null} ? 'Nueva Ruta' : 'Editar Ruta'"></h1>
+    <form th:action="@{/rutas/guardar}" th:object="${ruta}" method="post">
+      <input type="hidden" th:field="*{id}" />
+      <label>Origen:</label>
+      <select th:field="*{origen}">
+        <option th:each="ciudad : ${ciudades}" 
+                th:value="${ciudad.id}" 
+                th:text="${ciudad.nombre}"></option>
+      </select>
+      <br/>
+      <label>Destino:</label>
+      <select th:field="*{destino}">
+        <option th:each="ciudad : ${ciudades}" 
+                th:value="${ciudad.id}" 
+                th:text="${ciudad.nombre}"></option>
+      </select>
+      <br/>
+      <label>Ruta Segura:</label>
+      <input type="checkbox" th:field="*{segura}" />
+      <br/>
+      <label>Longitud:</label>
+      <input type="number" step="0.1" th:field="*{longitud}" required/>
+      <br/>
+      <label>Daño:</label>
+      <input type="number" th:field="*{dano}" />
+      <br/>
+      <label>Causa:</label>
+      <input type="text" th:field="*{causa}" />
+      <br/>
+      <button type="submit">Guardar</button>
+    </form>
+    <a th:href="@{/rutas}">Volver</a>
+  </body>
+</html>
